@@ -43,11 +43,15 @@ public class ActivityUtils {
      *
      */
     public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
-                                             @NonNull Fragment fragment, int frameId) {
+             int frameId , @NonNull Fragment... fragment) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment);
+
+        for (Fragment fr : fragment) {
+            transaction.add(frameId, fr);
+        }
+
         transaction.commit();
     }
 

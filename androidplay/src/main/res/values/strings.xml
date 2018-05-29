@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">AndroidPlay</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="play_app_name">AndroidPlay</string>
+    <string name="play_title_home">首页</string>
+    <string name="play_title_knowledge">体系</string>
+    <string name="play_title_notifications">导航</string>
+    <string name="play_title_pro">项目</string>
+
 </resources>

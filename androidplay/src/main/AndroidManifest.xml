@@ -2,11 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wind.androidplay">
 
-    <application
+    <application android:theme="@style/play_AppTheme">
 
-        android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.HomeActivity"
             android:screenOrientation="portrait" />
 
     </application>

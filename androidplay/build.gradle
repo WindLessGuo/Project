@@ -23,9 +23,10 @@ android {
         //ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
+
 
     }
 
@@ -41,13 +42,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    sourceSets{
-        main{
-            if (isModule.toBoolean()){
+    sourceSets {
+        main {
+            if (isModule.toBoolean()) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
-            }else {
+            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
-                java{
+                java {
                     exclude 'debug/**'
                 }
             }
@@ -59,12 +60,15 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-vector-drawable:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
     annotationProcessor rootProject.ext.dependencies.butterknife_compiler
     implementation project(':baselibrary')
+
 }

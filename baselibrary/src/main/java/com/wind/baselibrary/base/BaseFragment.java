@@ -1,4 +1,6 @@
 package com.wind.baselibrary.base;
 
-public class BaseFragment {
+import android.app.Fragment;
+
+public class BaseFragment extends Fragment{
 }
