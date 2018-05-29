@@ -3,24 +3,30 @@ if (isModule.toBoolean()) {
 } else {
     apply plugin: 'com.android.library'
 }
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
+
+
     defaultConfig {
         if (isModule.toBoolean())
-            applicationId "com.wind.patternone"
+            applicationId "com.wind.androidplay"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        vectorDrawables.useSupportLibrary = true
+
+        //ARouter
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [ moduleName : project.getName() ]
             }
         }
+
     }
 
     buildTypes {
@@ -29,10 +35,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     sourceSets{
         main{
             if (isModule.toBoolean()){
@@ -47,12 +55,11 @@ android {
     }
 
 
-    resourcePrefix "one_"
-
+    resourcePrefix "play_"
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

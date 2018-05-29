@@ -36,6 +36,8 @@ dependencies {
     api rootProject.ext.dependencies.autodispose_android
     api rootProject.ext.dependencies.guava
     api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.smartRefreshLayout
+    api rootProject.ext.dependencies.smartRefreshHeader
     api 'com.squareup.okhttp3:okhttp:3.10.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     api 'com.squareup.retrofit2:retrofit:2.4.0'
