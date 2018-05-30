@@ -16,6 +16,8 @@ public class MainActivity extends BaseActivity implements MainFragment.OnFragmen
 
     private Toolbar mToolbar;
 
+    //main？
+
 
     @Override
     protected int getLayoutRes() {
