@@ -5,9 +5,6 @@ import android.app.Application;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.baselibrary.BuildConfig;
 
-/**
- *
- */
 public class BaseApplication extends Application {
 
 
