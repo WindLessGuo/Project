@@ -3,7 +3,7 @@ package com.wind.patternone;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wind.baselibrary.base.BaseActivity;
 
-import static com.wind.baselibrary.content.ActivityConstant.patternOneMain;
+import static com.wind.baselibrary.content.PatternOneUiPath.patternOneMain;
 
 
 @Route(path = patternOneMain)

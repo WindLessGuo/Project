@@ -13,7 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.baselibrary.utils.ImgLoader;
 import com.wind.project.R;
 
-import static com.wind.baselibrary.content.ActivityConstant.patternOneMain;
+import static com.wind.baselibrary.content.PatternOneUiPath.patternOneMain;
 
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainHolder> {

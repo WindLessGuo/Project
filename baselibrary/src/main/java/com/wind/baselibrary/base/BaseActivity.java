@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.uber.autodispose.AutoDisposeConverter;
-import com.wind.baselibrary.content.ActivityConstant;
 import com.wind.baselibrary.utils.ActivityUtils;
 import com.wind.baselibrary.utils.RxLifecycleUtils;
 
