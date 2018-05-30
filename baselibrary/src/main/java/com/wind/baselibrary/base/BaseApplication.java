@@ -7,7 +7,7 @@ import com.wind.baselibrary.BuildConfig;
 
 
 public class BaseApplication extends Application {
-
+//base?
 
     private static BaseApplication getInstance = null;
 
