@@ -5,9 +5,11 @@ import android.app.Application;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.baselibrary.BuildConfig;
 
-
+/**
+ * 2018年5月30日 09:22:43
+ */
 public class BaseApplication extends Application {
-//base?
+
 
     private static BaseApplication getInstance = null;
 
