@@ -1,10 +1,12 @@
-package com.wind.androidplay;
+package debug;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.wind.androidplay.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,17 +17,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
 
-                    return true;
-                case R.id.navigation_dashboard:
-
-                    return true;
-                case R.id.navigation_notifications:
-
-                    return true;
+            if (item.getItemId() == R.id.navigation_home) {
+                return true;
+            } else if (item.getItemId() == R.id.navigation_dashboard) {
+                return true;
             }
+            if (item.getItemId() == R.id.navigation_notifications) {
+                return true;
+            }
+
+
             return false;
         }
     };
