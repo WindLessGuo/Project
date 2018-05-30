@@ -17,12 +17,6 @@ public abstract class BaseFragment extends Fragment {
 
     private Unbinder bind;
 
-/*    public static BaseFragment newInstance(String param1, String param2) {
-        BaseFragment fragment = new BaseFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
 
 
@@ -31,7 +25,6 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.mActivity = getActivity();
     }
-
 
 
     @Override

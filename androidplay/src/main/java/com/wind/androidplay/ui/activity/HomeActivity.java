@@ -12,6 +12,9 @@ import com.wind.baselibrary.base.BaseActivity;
 
 import butterknife.BindView;
 
+/**
+ *
+ */
 public class HomeActivity extends BaseActivity {
 
     @BindView(R.id.navigation) BottomNavigationView navigation;
