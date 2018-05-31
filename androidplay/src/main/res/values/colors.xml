@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="play_colorPrimary">#3F51B5</color>
+    <color name="play_colorPrimaryDark">#303F9F</color>
+    <color name="play_colorAccent">#FF4081</color>
+    <color name="play_delete_text">#cccccc</color>
+    <color name="play_yellow">#f39c12</color>
 </resources>

@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements MainFragment.OnFragmen
             mainFragment = mainFragment.newInstance("");
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    mainFragment, R.id.contentFrame);
+                    R.id.contentFrame, mainFragment);
         }
 
         new MainPresenter(mainFragment);

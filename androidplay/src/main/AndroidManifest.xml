@@ -5,7 +5,7 @@
     <application android:theme="@style/play_AppTheme">
 
         <activity
-            android:name="debug.MainActivity"
+            android:name=".ui.activity.HomeActivity"
             android:screenOrientation="portrait" />
 
     </application>

@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">BaseLibrary</string>
+    <string name="app_name">Wan</string>
+
+
+    //behavier
+    <string name="scale_down_show_behavior">com.wind.baselibrary.widget.behavior.ScaleDownShowBehavior</string>
+    <string name="bye_burger_bottom_behavior">com.wind.baselibrary.widget.behavior.byeburger.ByeBurgerBottomBehavior</string>
+    <string name="bye_burger_title_behavior">com.wind.baselibrary.widget.behavior.byeburger.ByeBurgerTitleBehavior</string>
+    <string name="bye_burger_float_behavior">com.wind.baselibrary.widget.behavior.byeburger.ByeBurgerFloatButtonBehavior</string>
+
 
 </resources>

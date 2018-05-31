@@ -2,6 +2,8 @@ package com.wind.androidplay.ui.fragment;
 
 import android.os.Bundle;
 
+import com.wind.androidplay.R;
+import com.wind.androidplay.base.PlayNormalBaseFragment;
 import com.wind.baselibrary.base.BaseFragment;
 import com.wind.baselibrary.base.NormalBaseFragment;
 
@@ -10,7 +12,7 @@ import com.wind.baselibrary.base.NormalBaseFragment;
  * @package : com.wind.androidplay.ui.fragment
  * @descrip :导航
  */
-public class NavigationFragment extends NormalBaseFragment {
+public class NavigationFragment extends PlayNormalBaseFragment {
 
     public static NavigationFragment newInstance() {
         NavigationFragment fragment = new NavigationFragment();
@@ -32,6 +34,6 @@ public class NavigationFragment extends NormalBaseFragment {
 
     @Override
     protected int getLayout() {
-        return 0;
+        return R.layout.play_fragment_navigation;
     }
 }

@@ -2,6 +2,8 @@ package com.wind.androidplay.ui.fragment;
 
 import android.os.Bundle;
 
+import com.wind.androidplay.R;
+import com.wind.androidplay.base.PlayNormalBaseFragment;
 import com.wind.baselibrary.base.NormalBaseFragment;
 
 /**
@@ -9,7 +11,7 @@ import com.wind.baselibrary.base.NormalBaseFragment;
  * @package : com.wind.androidplay.ui.fragment
  * @descrip :体系
  */
-public class SystemFragment extends NormalBaseFragment {
+public class SystemFragment extends PlayNormalBaseFragment {
 
     public static SystemFragment newInstance() {
         SystemFragment fragment = new SystemFragment();
@@ -31,6 +33,6 @@ public class SystemFragment extends NormalBaseFragment {
 
     @Override
     protected int getLayout() {
-        return 0;
+        return R.layout.play_fragment_system;
     }
 }

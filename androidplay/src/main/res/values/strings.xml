@@ -4,5 +4,9 @@
     <string name="play_title_knowledge">体系</string>
     <string name="play_title_notifications">导航</string>
     <string name="play_title_pro">项目</string>
-
+    <string name="play_nav_header_desc">Descr</string>
+    <string name="play_nav_header_title">header</string>
+    <string name="play_nav_header_subtitle">subtitle</string>
+    <string name="play_navigation_drawer_open">Open drawer</string>
+    <string name="play_navigation_drawer_close">Close drawer</string>
 </resources>
