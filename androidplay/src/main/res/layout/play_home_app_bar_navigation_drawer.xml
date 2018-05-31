@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,12 +18,23 @@
             android:layout_height="?attr/actionBarSize"
             android:fitsSystemWindows="false"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/play_AppTheme.PopupOverlay" />
+            app:navigationIcon="@drawable/play_ic_arrow_back_white_24dp"
+            app:popupTheme="@style/play_AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/main_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                tools:text="标题" />
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:background="@color/play_colorPrimary"
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

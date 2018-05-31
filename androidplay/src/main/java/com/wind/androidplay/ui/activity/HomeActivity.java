@@ -2,11 +2,13 @@ package com.wind.androidplay.ui.activity;
 
 import android.app.Fragment;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.wind.androidplay.R;
 import com.wind.androidplay.base.PlayBaseActivity;
@@ -20,15 +22,20 @@ import butterknife.BindView;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-/**
- *
- */
+
 public class HomeActivity extends PlayBaseActivity {
 
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
+
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.main_title)
+    TextView title;
 
     private HomeFragment homeFragment;
     private NavigationFragment navigationFragment;
@@ -42,15 +49,28 @@ public class HomeActivity extends PlayBaseActivity {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         switch (item.getItemId()) {
             case R.id.navigation_home:
+                title.setText(getString(R.string.play_main_home));
+                //开启手势滑动
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
                 showFragment(transaction, homeFragment);
                 return true;
             case R.id.navigation_dashboard:
+                title.setText(getString(R.string.play_main_system));
+                mDrawerLayout.closeDrawers();
+                //关闭手势滑动
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 showFragment(transaction, systemFragment);
                 return true;
             case R.id.navigation_notifications:
+                title.setText(getString(R.string.play_main_navigation));
+                mDrawerLayout.closeDrawers();
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 showFragment(transaction, navigationFragment);
                 return true;
             case R.id.navigation_pro:
+                title.setText(getString(R.string.play_main_project));
+                mDrawerLayout.closeDrawers();
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 showFragment(transaction, projectFragment);
                 return true;
 
@@ -65,6 +85,12 @@ public class HomeActivity extends PlayBaseActivity {
 
     @Override
     protected void init() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayShowTitleEnabled(false);
+        title.setText(getString(R.string.play_main_home));
+
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         homeFragment = HomeFragment.newInstance();
         transaction.add(R.id.fragment_container, homeFragment, homeFragmentTag);
@@ -83,8 +109,7 @@ public class HomeActivity extends PlayBaseActivity {
 
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        // bottomNavigationView.setSelectedItemId(R.id.navigation_home);
-        showFragment(transaction, homeFragment);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
 
         initDrawLayout();
     }
@@ -125,8 +150,6 @@ public class HomeActivity extends PlayBaseActivity {
 
     private void showFragment(android.app.FragmentTransaction transaction, Fragment showFragment) {
         checkNotNull(fragments);
-
-
         Log.d("fragment", "transaction: " + transaction.toString());
         for (Fragment f : fragments) {
             if (f == showFragment) {
@@ -134,6 +157,7 @@ public class HomeActivity extends PlayBaseActivity {
                 transaction.show(showFragment);
             } else transaction.hide(f);
         }
+        transaction.commit();
     }
 
 
