@@ -1,13 +1,20 @@
 package com.wind.androidplay.ui.activity;
 
 import android.app.Fragment;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.wind.androidplay.R;
@@ -16,6 +23,7 @@ import com.wind.androidplay.ui.fragment.HomeFragment;
 import com.wind.androidplay.ui.fragment.NavigationFragment;
 import com.wind.androidplay.ui.fragment.ProjectFragment;
 import com.wind.androidplay.ui.fragment.SystemFragment;
+import com.wind.baselibrary.utils.ActivityUtils;
 import com.wind.baselibrary.utils.BottomNavigationViewHelper;
 
 import butterknife.BindView;
@@ -23,26 +31,25 @@ import butterknife.BindView;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
-public class HomeActivity extends PlayBaseActivity {
+public class HomeActivity extends PlayBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
-
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.main_title)
     TextView title;
+    @BindView(R.id.navigation)
+    NavigationView mNavigationView;
 
     private HomeFragment homeFragment;
     private NavigationFragment navigationFragment;
     private ProjectFragment projectFragment;
     private SystemFragment systemFragment;
     private Fragment[] fragments;
-    //private   android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    private boolean isExit;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -78,6 +85,7 @@ public class HomeActivity extends PlayBaseActivity {
         return false;
     };
 
+
     @Override
     protected int getLayoutRes() {
         return R.layout.play_activity_home;
@@ -89,7 +97,9 @@ public class HomeActivity extends PlayBaseActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
+
         title.setText(getString(R.string.play_main_home));
+
 
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         homeFragment = HomeFragment.newInstance();
@@ -110,12 +120,14 @@ public class HomeActivity extends PlayBaseActivity {
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
-
         initDrawLayout();
     }
 
+
     private void initDrawLayout() {
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout,
+                toolbar,
                 R.string.play_navigation_drawer_open, R.string.play_navigation_drawer_close) {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -145,15 +157,14 @@ public class HomeActivity extends PlayBaseActivity {
         };
         toggle.syncState();
         mDrawerLayout.addDrawerListener(toggle);
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
 
     private void showFragment(android.app.FragmentTransaction transaction, Fragment showFragment) {
         checkNotNull(fragments);
-        Log.d("fragment", "transaction: " + transaction.toString());
         for (Fragment f : fragments) {
             if (f == showFragment) {
-                Log.d("fragment", "showFragment: " + showFragment.toString());
                 transaction.show(showFragment);
             } else transaction.hide(f);
         }
@@ -161,4 +172,58 @@ public class HomeActivity extends PlayBaseActivity {
     }
 
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            else {
+                if (!isExit) {
+                    showToast(R.string.play_main_exit);
+                    isExit = !isExit;
+                    new Handler().postDelayed(() -> isExit = !isExit, 2000);
+                } else {
+                    ActivityUtils.removeAll();
+                    finish();
+                }
+            }
+            return false;
+        } else return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.play_menu_home_toolbar, menu);
+        return true;
+    }
+
+    //toolbar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_usage:
+                break;
+            case R.id.action_search:
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else super.onBackPressed();
+    }
+
+
+    //drawerlayout
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+        }
+        return true;
+    }
 }

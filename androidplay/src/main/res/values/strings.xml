@@ -13,4 +13,9 @@
     <string name="play_main_system">体系</string>
     <string name="play_main_project">项目</string>
     <string name="play_main_navigation">导航</string>
+
+    <string name="play_main_exit">"再点击一次退出"</string>
+    <string name="play_action_search">Search</string>
+    <string name="useful_sites">web_collection</string>
+
 </resources>
