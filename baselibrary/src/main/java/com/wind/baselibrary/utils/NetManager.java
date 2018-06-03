@@ -1,7 +1,6 @@
 package com.wind.baselibrary.utils;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.wind.baselibrary.content.UrlConstant;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,11 +9,12 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NetManager implements UrlConstant {
+public class NetManager {
 
 
     private static final int timeOut = 10;
     private static Retrofit retrofit = null;
+    public static String BASE_URL ;
 
 
     private static OkHttpClient okHttpClient() {

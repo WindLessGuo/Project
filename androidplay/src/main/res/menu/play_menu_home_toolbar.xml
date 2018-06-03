@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_usage"
         android:icon="@mipmap/ic_action_assist_focused"
-        android:title="@string/useful_sites"
+        android:title="@string/play_useful_sites"
         app:showAsAction="ifRoom" />
 
     <item

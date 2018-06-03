@@ -3,6 +3,7 @@
     package="com.wind.androidplay">
 
     <application
+        android:name="debug.App"
         android:allowBackup="true"
         android:icon="@mipmap/play_ic_launcher"
         android:label="@string/app_name"
