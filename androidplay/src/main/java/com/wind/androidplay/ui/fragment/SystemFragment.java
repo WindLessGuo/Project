@@ -32,6 +32,11 @@ public class SystemFragment extends PlayNormalBaseFragment {
     }
 
     @Override
+    protected void init() {
+
+    }
+
+    @Override
     protected int getLayout() {
         return R.layout.play_fragment_system;
     }

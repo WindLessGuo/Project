@@ -10,10 +10,8 @@ import com.uber.autodispose.AutoDisposeConverter;
 import com.wind.baselibrary.utils.ActivityUtils;
 import com.wind.baselibrary.utils.RxLifecycleUtils;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<B extends BasePresenter>
+        extends AppCompatActivity implements BaseView {
 
     protected abstract int getLayoutRes();
 
@@ -21,24 +19,34 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected Activity mActivity;
 
-    private Unbinder bind;
+    protected B mPresenter;
+
+    // private Unbinder bind;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
         mActivity = this;
-        bind = ButterKnife.bind(this);
+        // bind = ButterKnife.bind(this);
         ActivityUtils.addActivity(this);
         init();
+        initPresenter();
+    }
+
+    private void initPresenter() {
+        if (mPresenter != null) {
+            mPresenter.onAttache(this, this);
+        }
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bind.unbind();
+        //bind.unbind();
         ActivityUtils.removeActivity(this);
+        if (mPresenter != null) mPresenter.onDetache();
     }
 
     /**
@@ -52,4 +60,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void setPresenter(AbstractContract presenter) {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+
+    }
 }

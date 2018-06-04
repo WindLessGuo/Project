@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.wind.androidplay.R;
@@ -26,22 +25,16 @@ import com.wind.androidplay.ui.fragment.SystemFragment;
 import com.wind.baselibrary.utils.ActivityUtils;
 import com.wind.baselibrary.utils.BottomNavigationViewHelper;
 
-import butterknife.BindView;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class HomeActivity extends PlayBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
-    @BindView(R.id.drawer_layout)
+
     DrawerLayout mDrawerLayout;
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.main_title)
     TextView title;
-    @BindView(R.id.navigation)
     NavigationView mNavigationView;
 
     private HomeFragment homeFragment;
@@ -54,33 +47,34 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                title.setText(getString(R.string.play_main_home));
-                //开启手势滑动
-                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                showFragment(transaction, homeFragment);
-                return true;
-            case R.id.navigation_dashboard:
-                title.setText(getString(R.string.play_main_system));
-                mDrawerLayout.closeDrawers();
-                //关闭手势滑动
-                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                showFragment(transaction, systemFragment);
-                return true;
-            case R.id.navigation_notifications:
-                title.setText(getString(R.string.play_main_navigation));
-                mDrawerLayout.closeDrawers();
-                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                showFragment(transaction, navigationFragment);
-                return true;
-            case R.id.navigation_pro:
-                title.setText(getString(R.string.play_main_project));
-                mDrawerLayout.closeDrawers();
-                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                showFragment(transaction, projectFragment);
-                return true;
 
+
+        int i = item.getItemId();
+        if (i == R.id.play_navigation_home) {
+            title.setText(getString(R.string.play_main_home));
+            //开启手势滑动
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            showFragment(transaction, homeFragment);
+            return true;
+        } else if (i == R.id.play_navigation_dashboard) {
+            title.setText(getString(R.string.play_main_system));
+            mDrawerLayout.closeDrawers();
+            //关闭手势滑动
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            showFragment(transaction, systemFragment);
+            return true;
+        } else if (i == R.id.play_navigation_notifications) {
+            title.setText(getString(R.string.play_main_navigation));
+            mDrawerLayout.closeDrawers();
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            showFragment(transaction, navigationFragment);
+            return true;
+        } else if (i == R.id.play_navigation_pro) {
+            title.setText(getString(R.string.play_main_project));
+            mDrawerLayout.closeDrawers();
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            showFragment(transaction, projectFragment);
+            return true;
         }
         return false;
     };
@@ -93,13 +87,13 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
 
     @Override
     protected void init() {
+        initViews();
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
 
         title.setText(getString(R.string.play_main_home));
-
 
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
         homeFragment = HomeFragment.newInstance();
@@ -119,8 +113,16 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
 
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        bottomNavigationView.setSelectedItemId(R.id.play_navigation_home);
         initDrawLayout();
+    }
+
+    private void initViews() {
+        bottomNavigationView = findViewById(R.id.play_bottom_navigation_view);
+        mDrawerLayout = findViewById(R.id.play_drawer_layout);
+        toolbar = findViewById(R.id.play_toolbar);
+        title = findViewById(R.id.play_main_title);
+        mNavigationView = findViewById(R.id.play_navigation);
     }
 
 
@@ -201,11 +203,9 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
     //toolbar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_usage:
-                break;
-            case R.id.action_search:
-                break;
+        int i = item.getItemId();
+        if (i == R.id.action_usage) {
+        } else if (i == R.id.action_search) {
 
         }
         return super.onOptionsItemSelected(item);
