@@ -15,7 +15,7 @@ import java.util.List;
  * @time: 14:29
  * @descrip:
  */
-public class HomePresenter extends BasePresenter<HomeContract.HomeView> implements HomeContract.Presenter{
+public class HomePresenter extends BasePresenter<HomeContract.HomeView> implements HomeContract.Presenter {
 
 
     public HomePresenter(HomeContract.HomeView mView) {
@@ -27,8 +27,8 @@ public class HomePresenter extends BasePresenter<HomeContract.HomeView> implemen
                 new HttpCallBack<BaseBean<List<HomeBannerBean>>>() {
                     @Override
                     protected void onSuccess(BaseBean<List<HomeBannerBean>> obj) {
-                        if (isSuccess(obj.errorCode)) {
-                            mView.showBanner(obj.t);
+                        if (isSuccess(obj.errorCode) && obj.data.size() > 0){
+                            mView.showBanner(obj.data);
                         } else mView.showError(obj.errorMsg);
                     }
 
@@ -49,11 +49,11 @@ public class HomePresenter extends BasePresenter<HomeContract.HomeView> implemen
         mView.showLoading();
         obtainNetData(NetManager.obtainClass(Api.class)
                         .obtainHomeListData(index),
-                new HttpCallBack<BaseBean<List<HomeListDataBean>>>() {
+                new HttpCallBack<BaseBean<HomeListDataBean>>() {
                     @Override
-                    protected void onSuccess(BaseBean<List<HomeListDataBean>> bean) {
+                    protected void onSuccess(BaseBean<HomeListDataBean> bean) {
                         if (isSuccess(bean.errorCode)) {
-                            mView.showHomeList(bean.t);
+                            mView.showHomeList(bean.data);
                         } else {
                             mView.showError(bean.errorMsg);
                         }

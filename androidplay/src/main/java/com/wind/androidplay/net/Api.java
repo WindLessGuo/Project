@@ -34,7 +34,7 @@ public interface Api {
      * @return
      */
     @GET("article/list/{pageNum}/json")
-    Observable<BaseBean<List<HomeListDataBean>>> obtainHomeListData(@Path("pageNum") int index);
+    Observable<BaseBean<HomeListDataBean>> obtainHomeListData(@Path("pageNum") int index);
 
 
     /**

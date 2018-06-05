@@ -37,7 +37,8 @@ public class NetManager {
          */
 
         HttpLoggingInterceptor loggingInterceptor =
-                new HttpLoggingInterceptor(message -> LG.D("net", message));
+                new HttpLoggingInterceptor(message ->
+                        LG.D("net", message));
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)

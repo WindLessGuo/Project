@@ -41,4 +41,9 @@ public class NavigationFragment extends PlayNormalBaseFragment {
     protected int getLayout() {
         return R.layout.play_fragment_navigation;
     }
+
+    @Override
+    protected void initializablePresenter() {
+
+    }
 }

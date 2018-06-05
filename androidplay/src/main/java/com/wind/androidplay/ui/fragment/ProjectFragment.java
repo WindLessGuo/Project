@@ -39,4 +39,9 @@ public class ProjectFragment extends PlayNormalBaseFragment {
     protected int getLayout() {
         return R.layout.play_fragment_project;
     }
+
+    @Override
+    protected void initializablePresenter() {
+
+    }
 }

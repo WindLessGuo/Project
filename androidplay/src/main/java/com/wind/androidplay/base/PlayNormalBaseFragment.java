@@ -12,10 +12,13 @@ public abstract class PlayNormalBaseFragment<P extends BasePresenter>
 
 
     protected void initPresenter() {
+        initializablePresenter();
         if (mPresenter != null) {
             mPresenter.onAttache(this);
         }
     }
+
+    protected abstract void initializablePresenter();
 
 
     @Override

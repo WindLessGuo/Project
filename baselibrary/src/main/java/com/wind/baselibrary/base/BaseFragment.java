@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 //
 
-public abstract class BaseFragment extends Fragment  {
+public abstract class BaseFragment extends Fragment {
 
     protected Activity mActivity;
     protected View rootView;
@@ -30,8 +30,8 @@ public abstract class BaseFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayout(), container, false);
-        init();
         initPresenter();
+        init();
         return rootView;
     }
 

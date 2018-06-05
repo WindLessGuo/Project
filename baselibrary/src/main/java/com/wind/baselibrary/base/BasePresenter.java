@@ -44,7 +44,7 @@ public abstract class BasePresenter<T extends BaseView> {
     protected <O> void obtainNetData(Observable<O> observable, HttpCallBack<O> observer) {
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner)))
+               /* .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner)))*/
                 .subscribe(observer);
     }
 

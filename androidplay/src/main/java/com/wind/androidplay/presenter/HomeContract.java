@@ -19,7 +19,7 @@ public interface HomeContract extends BaseView {
     interface HomeView extends BaseView {
         void showBanner(List<HomeBannerBean> list);
 
-        void showHomeList(List<HomeListDataBean> list);
+        void showHomeList(HomeListDataBean list);
 
         void dataEmpty();
     }

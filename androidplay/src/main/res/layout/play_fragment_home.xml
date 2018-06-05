@@ -2,8 +2,7 @@
 <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/play_colorAccent">
+    android:layout_height="match_parent" >
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/play_home_recycler"

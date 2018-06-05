@@ -8,5 +8,5 @@ package com.wind.androidplay.base;
 public class BaseBean<T> {
     public int errorCode;
     public String errorMsg;
-    public T t;
+    public T data;
 }

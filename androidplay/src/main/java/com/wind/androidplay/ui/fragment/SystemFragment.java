@@ -40,4 +40,9 @@ public class SystemFragment extends PlayNormalBaseFragment {
     protected int getLayout() {
         return R.layout.play_fragment_system;
     }
+
+    @Override
+    protected void initializablePresenter() {
+
+    }
 }
