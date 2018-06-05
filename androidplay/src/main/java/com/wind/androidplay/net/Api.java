@@ -1,5 +1,6 @@
 package com.wind.androidplay.net;
 
+import com.wind.androidplay.base.BaseBean;
 import com.wind.androidplay.bean.CommonlyUsedWebBean;
 import com.wind.androidplay.bean.HomeBannerBean;
 import com.wind.androidplay.bean.HomeListDataBean;
@@ -9,6 +10,8 @@ import com.wind.androidplay.bean.ProClassifyBean;
 import com.wind.androidplay.bean.ProListDataBean;
 import com.wind.androidplay.bean.SystemAtricleBean;
 import com.wind.androidplay.bean.SystemTreeBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.internal.operators.observable.ObservableTake;
@@ -31,14 +34,14 @@ public interface Api {
      * @return
      */
     @GET("article/list/{pageNum}/json")
-    Observable<HomeListDataBean> obtainHomeListData(@Path("pageNum") int index);
+    Observable<BaseBean<List<HomeListDataBean>>> obtainHomeListData(@Path("pageNum") int index);
 
 
     /**
      * 1.2 首页banner
      */
     @GET("banner/json")
-    Observable<HomeBannerBean> obtainHomeBannerData();
+    Observable<BaseBean<List<HomeBannerBean>>> obtainHomeBannerData();
 
 
     /**

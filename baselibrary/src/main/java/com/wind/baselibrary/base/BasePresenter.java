@@ -1,6 +1,5 @@
 package com.wind.baselibrary.base;
 
-import android.app.Activity;
 import android.arch.lifecycle.LifecycleOwner;
 
 import com.uber.autodispose.AutoDispose;
@@ -17,24 +16,29 @@ import io.reactivex.schedulers.Schedulers;
  */
 public abstract class BasePresenter<T extends BaseView> {
 
-    private T mView;
+    protected T mView;
     private LifecycleOwner lifecycleOwner;
+    private AbstractContract contract;
 
 
-    protected void onDetache() {
+    public void onDetache() {
         if (mView != null) {
             mView = null;
         }
     }
 
 
-    public void onAttache(T mView, LifecycleOwner lifecycleOwner) {
-        this.mView = mView;
+    public void onAttache(LifecycleOwner lifecycleOwner) {
         this.lifecycleOwner = lifecycleOwner;
-        initContract(this.mView);
+
     }
 
-    protected abstract void initContract(T mView);
+
+
+
+    public BasePresenter(T mView) {
+        this.mView = mView;
+    }
 
 
     protected <O> void obtainNetData(Observable<O> observable, HttpCallBack<O> observer) {
@@ -42,6 +46,12 @@ public abstract class BasePresenter<T extends BaseView> {
                 .subscribeOn(Schedulers.io())
                 .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(lifecycleOwner)))
                 .subscribe(observer);
+    }
+
+
+    protected boolean isSuccess(int errorCode) {
+        if (errorCode >= 0) return true;
+        return false;
     }
 
 

@@ -1,10 +1,12 @@
 package com.wind.androidplay.ui.activity;
 
-import android.app.Fragment;
+
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -46,8 +48,7 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
-        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         int i = item.getItemId();
         if (i == R.id.play_navigation_home) {
@@ -95,7 +96,7 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
 
         title.setText(getString(R.string.play_main_home));
 
-        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         homeFragment = HomeFragment.newInstance();
         transaction.add(R.id.fragment_container, homeFragment, homeFragmentTag);
 
@@ -163,7 +164,7 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
     }
 
 
-    private void showFragment(android.app.FragmentTransaction transaction, Fragment showFragment) {
+    private void showFragment(FragmentTransaction transaction, Fragment showFragment) {
         checkNotNull(fragments);
         for (Fragment f : fragments) {
             if (f == showFragment) {

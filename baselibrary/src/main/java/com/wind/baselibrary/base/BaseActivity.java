@@ -5,13 +5,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.uber.autodispose.AutoDisposeConverter;
+import com.wind.baselibrary.R;
 import com.wind.baselibrary.utils.ActivityUtils;
 import com.wind.baselibrary.utils.RxLifecycleUtils;
 
-public abstract class BaseActivity<B extends BasePresenter>
-        extends AppCompatActivity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getLayoutRes();
 
@@ -19,7 +20,7 @@ public abstract class BaseActivity<B extends BasePresenter>
 
     protected Activity mActivity;
 
-    protected B mPresenter;
+
 
     // private Unbinder bind;
 
@@ -34,11 +35,7 @@ public abstract class BaseActivity<B extends BasePresenter>
         initPresenter();
     }
 
-    private void initPresenter() {
-        if (mPresenter != null) {
-            mPresenter.onAttache(this, this);
-        }
-    }
+    protected abstract void initPresenter();
 
 
     @Override
@@ -46,7 +43,7 @@ public abstract class BaseActivity<B extends BasePresenter>
         super.onDestroy();
         //bind.unbind();
         ActivityUtils.removeActivity(this);
-        if (mPresenter != null) mPresenter.onDetache();
+
     }
 
     /**
@@ -60,13 +57,14 @@ public abstract class BaseActivity<B extends BasePresenter>
     }
 
 
-    @Override
-    public void setPresenter(AbstractContract presenter) {
-
+    protected void showToast(String str) {
+        Toast.makeText(mActivity, str, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showError(String msg) {
-
+    protected void showToast(int strId) {
+        showToast(getString(strId));
     }
+
+
+
 }

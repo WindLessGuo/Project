@@ -1,9 +1,13 @@
 package com.wind.baselibrary.base;
 
-public interface  BaseView<T extends AbstractContract> {
-
-    void setPresenter(T presenter);
+public interface BaseView {
 
     void showError(String msg);
+
+    void showLoading();
+
+    void closeLoading();
+
+    void empty();
 
 }

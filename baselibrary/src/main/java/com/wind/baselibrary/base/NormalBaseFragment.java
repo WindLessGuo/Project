@@ -6,7 +6,7 @@ package com.wind.baselibrary.base;
  * @description ：NormalBaseFragment
  */
 
-public abstract class NormalBaseFragment extends BaseFragment {
+public abstract class NormalBaseFragment   extends BaseFragment {
 
     /**
      * false == 未隐藏

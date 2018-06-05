@@ -1,5 +1,6 @@
 package com.wind.androidplay.presenter;
 
+import com.wind.androidplay.base.BaseBean;
 import com.wind.androidplay.bean.HomeBannerBean;
 import com.wind.androidplay.bean.HomeListDataBean;
 import com.wind.androidplay.net.Api;
@@ -7,46 +8,68 @@ import com.wind.baselibrary.base.BasePresenter;
 import com.wind.baselibrary.base.HttpCallBack;
 import com.wind.baselibrary.utils.NetManager;
 
+import java.util.List;
+
 /**
  * @author: GBX
  * @time: 14:29
  * @descrip:
  */
-public class HomePresenter extends BasePresenter<HomeContract.HomeView> implements HomeContract.Presenter {
-
-    private HomeContract.HomeView mView;
+public class HomePresenter extends BasePresenter<HomeContract.HomeView> implements HomeContract.Presenter{
 
 
-    @Override
-    public void obtainBanner(HomeBannerBean bannerBean) {
+    public HomePresenter(HomeContract.HomeView mView) {
+        super(mView);
+    }
+
+    public void obtainBanner() {
         obtainNetData(NetManager.obtainClass(Api.class).obtainHomeBannerData(),
-                new HttpCallBack<HomeBannerBean>() {
+                new HttpCallBack<BaseBean<List<HomeBannerBean>>>() {
                     @Override
-                    protected void onSuccess(HomeBannerBean bannerBean) {
-
+                    protected void onSuccess(BaseBean<List<HomeBannerBean>> obj) {
+                        if (isSuccess(obj.errorCode)) {
+                            mView.showBanner(obj.t);
+                        } else mView.showError(obj.errorMsg);
                     }
+
 
                     @Override
                     protected void onFailer(Throwable e) {
-
+                        mView.showError(e.getMessage());
                     }
 
                     @Override
                     protected void onFinish() {
-
                     }
                 });
     }
 
-    @Override
-    public void obtainHomeList(HomeListDataBean bean) {
 
+    public void obtainHomeList(int index) {
+        mView.showLoading();
+        obtainNetData(NetManager.obtainClass(Api.class)
+                        .obtainHomeListData(index),
+                new HttpCallBack<BaseBean<List<HomeListDataBean>>>() {
+                    @Override
+                    protected void onSuccess(BaseBean<List<HomeListDataBean>> bean) {
+                        if (isSuccess(bean.errorCode)) {
+                            mView.showHomeList(bean.t);
+                        } else {
+                            mView.showError(bean.errorMsg);
+                        }
+                    }
+
+                    @Override
+                    protected void onFailer(Throwable e) {
+                        mView.showError(e.getMessage());
+                    }
+
+                    @Override
+                    protected void onFinish() {
+                        mView.closeLoading();
+                    }
+                });
     }
 
 
-    @Override
-    protected void initContract(HomeContract.HomeView mView) {
-        this.mView = mView;
-        mView.setPresenter(this);
-    }
 }
