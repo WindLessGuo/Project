@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.wind.baselibrary.utils.ImgLoader;
+import com.wind.baselibrary.utils.gilde.ImgLoader;
 import com.wind.project.R;
 
 import static com.wind.baselibrary.content.PatternOneUiPath.patternOneMain;

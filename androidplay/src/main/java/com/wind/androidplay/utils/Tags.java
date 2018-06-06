@@ -7,5 +7,8 @@ public interface Tags {
     String projectFragmentTag = "ProjectFragment";
     String systemFragmentTag = "SystemFragment";
 
+    String linlUrl = "link";
+    String title = "title";
+
 
 }

@@ -19,4 +19,9 @@ public class MainActivity extends BaseActivity {
     protected void init() {
 
     }
+
+    @Override
+    protected void initPresenter() {
+
+    }
 }

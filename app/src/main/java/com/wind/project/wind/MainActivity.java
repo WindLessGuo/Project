@@ -47,6 +47,11 @@ public class MainActivity extends BaseActivity implements MainFragment.OnFragmen
     }
 
     @Override
+    protected void initPresenter() {
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {

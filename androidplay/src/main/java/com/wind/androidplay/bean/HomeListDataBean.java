@@ -135,6 +135,16 @@ public class HomeListDataBean {
         private int zan;
         private List<?> tags;
 
+        private String headPic;
+
+        public String getHeadPic() {
+            return headPic;
+        }
+
+        public void setHeadPic(String headPic) {
+            this.headPic = headPic;
+        }
+
         public String getApkLink() {
             return apkLink;
         }
