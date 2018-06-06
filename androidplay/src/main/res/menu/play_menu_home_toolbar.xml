@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/action_search"
-        android:icon="@mipmap/ic_accessibility_magnification"
+        android:icon="@android:drawable/ic_menu_search"
         android:title="@string/play_action_search"
         app:showAsAction="ifRoom" />
 </menu>

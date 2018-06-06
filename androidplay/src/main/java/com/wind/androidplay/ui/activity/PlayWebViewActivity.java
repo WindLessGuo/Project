@@ -1,18 +1,28 @@
 package com.wind.androidplay.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.androidplay.R;
 import com.wind.androidplay.base.PlayBaseActivity;
+import com.wind.androidplay.utils.Tags;
+
+import java.lang.reflect.Method;
 
 import static com.wind.baselibrary.content.PlayUiPath.webViewActivity;
 
@@ -25,8 +35,12 @@ import static com.wind.baselibrary.content.PlayUiPath.webViewActivity;
 public class PlayWebViewActivity extends PlayBaseActivity {
 
     private WebView mWebView;
-    private String url;
     private Toolbar mToolbar;
+    private ProgressBar mProgressBar;
+
+    private String url;
+    private String mTitle;
+    private boolean isBanner;
 
 
     @Override
@@ -36,13 +50,11 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
     @Override
     protected void init() {
-        if (!TextUtils.isEmpty(getIntent().getStringExtra(linlUrl)))
-            url = getIntent().getStringExtra(linlUrl);
-
+        getIntentData();
         mToolbar = findViewById(R.id.web_toolbar);
+        mToolbar.setTitle(mTitle);
         setSupportActionBar(mToolbar);
-
-        mToolbar.setTitle(getIntent().getStringExtra(title));
+        mProgressBar = findViewById(R.id.progressbar);
 
         mWebView = findViewById(R.id.webview);
         WebSettings settings = mWebView.getSettings();
@@ -84,15 +96,37 @@ public class PlayWebViewActivity extends PlayBaseActivity {
             }
         });
 
-        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (newProgress == 100) mProgressBar.setVisibility(View.GONE);
+                else {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    mProgressBar.setProgress(newProgress);
+                }
+            }
+        });
 
 
         mWebView.loadUrl(url);
     }
 
+    private void getIntentData() {
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(linkUrl)))
+            url = getIntent().getStringExtra(linkUrl);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra(title))) {
+            mTitle = getIntent().getStringExtra(title);
+        }
+        isBanner = getIntent().getBooleanExtra(Tags.isBanner, false);
+
+
+    }
+
 
     @Override
     protected void onDestroy() {
+        mWebView.clearHistory();
         mWebView.clearCache(true);
         mWebView = null;
         super.onDestroy();
@@ -103,6 +137,26 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //if (!isBanner) {
+        getMenuInflater().inflate(R.menu.play_menu_webview, menu);
+        // }
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            PlayWebViewActivity.this.finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -122,5 +176,26 @@ public class PlayWebViewActivity extends PlayBaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+  /*  *//**
+     * 让菜单同时显示图标和文字
+     *
+     * @param featureId Feature id
+     * @param menu      Menu
+     * @return menu if opened
+     *//*
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (menu != null && isBanner) {
+            try {
+                @SuppressLint("PrivateApi")
+                Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                method.setAccessible(true);
+                method.invoke(menu, true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }*/
 
 }

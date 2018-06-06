@@ -7,9 +7,10 @@ import com.wind.androidplay.utils.Tags;
 import com.wind.baselibrary.base.BasePresenter;
 import com.wind.baselibrary.base.BaseView;
 import com.wind.baselibrary.base.NormalBaseFragment;
+import com.wind.baselibrary.content.PlayUiPath;
 
 public abstract class PlayNormalBaseFragment<P extends BasePresenter>
-        extends NormalBaseFragment implements Tags, BaseView {
+        extends NormalBaseFragment implements Tags, BaseView,PlayUiPath {
 
     protected P mPresenter;
     protected View emptyView;

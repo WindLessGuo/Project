@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.animation.BaseAnimation;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -129,11 +130,10 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
         banner.setDelayTime(list.size() * 300);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
-        banner.setOnBannerListener(i -> {
-            startActivity(new Intent(mActivity, PlayWebViewActivity.class)
-                    .putExtra(linlUrl, list.get(i).getUrl())
-                    .putExtra(title,list.get(i).getTitle() ));
-        });
+        banner.setOnBannerListener(i -> ARouter.getInstance().build(webViewActivity)
+                .withString(linkUrl, list.get(i).getUrl())
+                .withString(title, list.get(i).getTitle())
+                .withBoolean(isBanner, true).navigation());
         //banner设置方法全部调用完毕时最后调用
         banner.start();
     }

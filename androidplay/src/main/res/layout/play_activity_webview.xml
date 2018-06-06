@@ -4,12 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/web_toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/barlayout"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        app:navigationIcon="@drawable/play_ic_arrow_back_white_24dp" />
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:fitsSystemWindows="false"
+        android:theme="@style/play_AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/web_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:navigationIcon="@drawable/play_ic_arrow_back_white_24dp"
+            app:titleTextColor="@android:color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/play_common_margin4"
+        android:progressDrawable="@drawable/play_progressbar_bg"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barlayout" />
 
     <WebView
         android:id="@+id/webview"
@@ -18,6 +38,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/web_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/progressbar" />
 
 </android.support.constraint.ConstraintLayout>

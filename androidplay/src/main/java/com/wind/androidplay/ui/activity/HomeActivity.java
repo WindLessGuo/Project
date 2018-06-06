@@ -126,9 +126,7 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
         mNavigationView = findViewById(R.id.play_navigation);
     }
 
-
     private void initDrawLayout() {
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout,
                 toolbar,
                 R.string.play_navigation_drawer_open, R.string.play_navigation_drawer_close) {
