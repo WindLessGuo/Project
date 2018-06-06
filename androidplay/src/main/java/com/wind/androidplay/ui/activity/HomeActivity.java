@@ -29,7 +29,7 @@ import com.wind.baselibrary.utils.BottomNavigationViewHelper;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-
+//
 public class HomeActivity extends PlayBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     BottomNavigationView bottomNavigationView;
