@@ -3,14 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="SystemFragment"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
-
+    <include layout="@layout/common_refresh_layout" />
 
 </android.support.constraint.ConstraintLayout>

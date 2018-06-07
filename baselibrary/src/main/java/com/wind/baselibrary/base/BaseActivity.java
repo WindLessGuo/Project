@@ -5,8 +5,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.uber.autodispose.AutoDisposeConverter;
 import com.wind.baselibrary.R;
 import com.wind.baselibrary.utils.ActivityUtils;
@@ -21,15 +24,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Activity mActivity;
 
 
+    protected ViewGroup mViewGroup;
+    protected View mLoadingView;
+    protected LottieAnimationView mLoadingAnimation;
+
 
     // private Unbinder bind;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutRes());
+
+        mViewGroup = (ViewGroup) ViewGroup.inflate(this, getLayoutRes(), null);
+        View.inflate(this, R.layout.loading_view, mViewGroup);
+        mLoadingView = mViewGroup.findViewById(R.id.loading_group);
+        mLoadingAnimation = mLoadingView.findViewById(R.id.loading_animation);
+        setContentView(mViewGroup);
+        mLoadingView.setVisibility(View.GONE);
         mActivity = this;
-        // bind = ButterKnife.bind(this);
         ActivityUtils.addActivity(this);
         init();
         initPresenter();
@@ -41,8 +53,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //bind.unbind();
         ActivityUtils.removeActivity(this);
+        onActivityDestroy();
+    }
+
+    protected void onActivityDestroy() {
 
     }
 
@@ -64,7 +79,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showToast(int strId) {
         showToast(getString(strId));
     }
-
 
 
 }

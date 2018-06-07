@@ -1,20 +1,14 @@
 package com.wind.androidplay.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.animation.BaseAnimation;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wind.androidplay.R;
@@ -23,7 +17,6 @@ import com.wind.androidplay.bean.HomeBannerBean;
 import com.wind.androidplay.bean.HomeListDataBean;
 import com.wind.androidplay.presenter.HomeContract;
 import com.wind.androidplay.presenter.HomePresenter;
-import com.wind.androidplay.ui.activity.PlayWebViewActivity;
 import com.wind.androidplay.ui.adapter.HomeAdapter;
 import com.wind.baselibrary.utils.BannerGlideImageLoader;
 import com.youth.banner.Banner;
@@ -73,8 +66,10 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
     @Override
     protected void init() {
         refreshLayout = rootView.findViewById(R.id.refresh);
-        recyclerView = rootView.findViewById(R.id.play_home_recycler);
+        recyclerView = rootView.findViewById(R.id._recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        //数据 只有一列的情况下（未超过一屏）
+        refreshLayout.setEnableLoadMoreWhenContentNotFull(true);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setOnLoadMoreListener(this);
 
@@ -83,6 +78,9 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
         banner = headerView.findViewById(R.id.banner);
         homeAdapter.addHeaderView(headerView);
         homeAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
+        homeAdapter.setOnItemClickListener((adapter, view, position)
+                -> skipView(mlist.get(position).getLink(),
+                mlist.get(position).getTitle(), false));
         recyclerView.setAdapter(homeAdapter);
         obtainNetData();
     }
@@ -130,12 +128,17 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
         banner.setDelayTime(list.size() * 300);
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
-        banner.setOnBannerListener(i -> ARouter.getInstance().build(webViewActivity)
-                .withString(linkUrl, list.get(i).getUrl())
-                .withString(title, list.get(i).getTitle())
-                .withBoolean(isBanner, true).navigation());
+        banner.setOnBannerListener(i ->
+                skipView(list.get(i).getUrl(), list.get(i).getTitle(), true));
         //banner设置方法全部调用完毕时最后调用
         banner.start();
+    }
+
+    private void skipView(String url, String mTitle, boolean s) {
+        ARouter.getInstance().build(webViewActivity)
+                .withString(linkUrl, url)
+                .withString(title, mTitle)
+                .withBoolean(isBanner, s).navigation();
     }
 
     @Override
@@ -150,9 +153,17 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
         }
     }
 
+
+    @Override
+    public void showError(String msg) {
+        super.showError(msg);
+        if (index == 0)
+            refreshLayout.finishRefresh(false);
+        else refreshLayout.finishLoadMore(false);
+    }
+
     @Override
     public void dataEmpty() {
-
 
     }
 

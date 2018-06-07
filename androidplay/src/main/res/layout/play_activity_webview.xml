@@ -16,7 +16,9 @@
             android:id="@+id/web_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
+            android:popupBackground="@android:color/white"
             app:navigationIcon="@drawable/play_ic_arrow_back_white_24dp"
+            app:popupTheme="@style/play_ToolbarPopupTheme"
             app:titleTextColor="@android:color/white" />
     </android.support.design.widget.AppBarLayout>
 

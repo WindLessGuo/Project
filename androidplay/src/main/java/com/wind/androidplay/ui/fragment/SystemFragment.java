@@ -1,7 +1,9 @@
 package com.wind.androidplay.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wind.androidplay.R;
 import com.wind.androidplay.base.PlayNormalBaseFragment;
 import com.wind.baselibrary.base.NormalBaseFragment;
@@ -12,6 +14,10 @@ import com.wind.baselibrary.base.NormalBaseFragment;
  * @descrip :体系
  */
 public class SystemFragment extends PlayNormalBaseFragment {
+
+
+    private SmartRefreshLayout refreshLayout;
+    private RecyclerView recyclerView;
 
     public static SystemFragment newInstance() {
         SystemFragment fragment = new SystemFragment();

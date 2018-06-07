@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/action_usage"
-        android:icon="@mipmap/ic_action_assist_focused"
+        android:icon="@mipmap/play_web"
         android:title="@string/play_useful_sites"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@mipmap/play_search"
         android:title="@string/play_action_search"
         app:showAsAction="ifRoom" />
 </menu>

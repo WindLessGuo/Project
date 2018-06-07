@@ -140,10 +140,9 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //if (!isBanner) {
-        getMenuInflater().inflate(R.menu.play_menu_webview, menu);
-        // }
-
+        if (!isBanner) {
+            getMenuInflater().inflate(R.menu.play_menu_webview, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -176,16 +175,18 @@ public class PlayWebViewActivity extends PlayBaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-  /*  *//**
+    /*  */
+
+    /**
      * 让菜单同时显示图标和文字
      *
      * @param featureId Feature id
      * @param menu      Menu
      * @return menu if opened
-     *//*
+     */
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
-        if (menu != null && isBanner) {
+        if (menu != null) {
             try {
                 @SuppressLint("PrivateApi")
                 Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
@@ -196,6 +197,6 @@ public class PlayWebViewActivity extends PlayBaseActivity {
             }
         }
         return super.onMenuOpened(featureId, menu);
-    }*/
+    }
 
 }

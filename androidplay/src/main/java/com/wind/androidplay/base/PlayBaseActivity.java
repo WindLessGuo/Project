@@ -1,6 +1,5 @@
 package com.wind.androidplay.base;
 
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,13 +44,36 @@ public abstract class PlayBaseActivity<B extends BasePresenter> extends
 
     @Override
     public void showLoading() {
-
+        //mLoadingView.setVisibility(View.VISIBLE);
+        // TODO: 2018/6/7 编写json
+        //  mLoadingAnimation.setAnimation("lottifiles.com - QR Scan");
+        //mLoadingAnimation.setRepeatMode(ValueAnimator.INFINITE); 并不起作用
+        //   mLoadingAnimation.loop(true);
+        //mLoadingAnimation.playAnimation();
     }
 
 
     @Override
     public void closeLoading() {
+        if (mLoadingAnimation.isAnimating() && mLoadingView.getVisibility() == View.VISIBLE)
+            mLoadingAnimation.cancelAnimation();
+        mLoadingView.setVisibility(View.GONE);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mLoadingAnimation.pauseAnimation();
+        mLoadingView.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    protected void onActivityDestroy() {
+        if (mLoadingAnimation != null && mLoadingView.getVisibility() == View.VISIBLE) {
+            mLoadingAnimation.cancelAnimation();
+            mLoadingView.setVisibility(View.GONE);
+        }
     }
 
     @Override
