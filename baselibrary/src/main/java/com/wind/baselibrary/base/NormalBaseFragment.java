@@ -7,7 +7,7 @@ package com.wind.baselibrary.base;
  */
 
 public abstract class NormalBaseFragment   extends BaseFragment {
-
+    protected boolean canShowing;
     /**
      * false == 未隐藏
      * true == 隐藏
@@ -16,6 +16,7 @@ public abstract class NormalBaseFragment   extends BaseFragment {
      */
     @Override
     public void onHiddenChanged(boolean hidden) {
+        canShowing = hidden;
         if (hidden) onHidden();
         else lazyLoad();
     }

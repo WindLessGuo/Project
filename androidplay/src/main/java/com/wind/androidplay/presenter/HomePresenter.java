@@ -27,7 +27,7 @@ public class HomePresenter extends BasePresenter<HomeContract.HomeView> implemen
                 new HttpCallBack<BaseBean<List<HomeBannerBean>>>() {
                     @Override
                     protected void onSuccess(BaseBean<List<HomeBannerBean>> obj) {
-                        if (isSuccess(obj.errorCode) && obj.data.size() > 0){
+                        if (isSuccess(obj.errorCode) && obj.data.size() > 0) {
                             mView.showBanner(obj.data);
                         } else mView.showError(obj.errorMsg);
                     }
@@ -66,7 +66,7 @@ public class HomePresenter extends BasePresenter<HomeContract.HomeView> implemen
 
                     @Override
                     protected void onFinish() {
-                        mView.closeLoading();
+                       // mView.closeLoading();
                     }
                 });
     }

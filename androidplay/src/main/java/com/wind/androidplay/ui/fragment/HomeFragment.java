@@ -65,7 +65,8 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
 
     @Override
     protected void init() {
-        refreshLayout = rootView.findViewById(R.id.refresh);
+        showLoading();
+        refreshLayout = rootView.findViewById(R.id.common_view);
         recyclerView = rootView.findViewById(R.id._recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         //数据 只有一列的情况下（未超过一屏）
@@ -82,7 +83,6 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
                 -> skipView(mlist.get(position).getLink(),
                 mlist.get(position).getTitle(), false));
         recyclerView.setAdapter(homeAdapter);
-        obtainNetData();
     }
 
     @Override

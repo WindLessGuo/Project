@@ -16,7 +16,6 @@ public abstract class BaseFragment extends Fragment {
     protected View rootView;
 
 
-    //private Unbinder bind;
 
 
     @Override
@@ -32,8 +31,11 @@ public abstract class BaseFragment extends Fragment {
         rootView = inflater.inflate(getLayout(), container, false);
         initPresenter();
         init();
+        initializeLoading(rootView);
         return rootView;
     }
+
+    protected abstract void initializeLoading(View rootView);
 
     protected abstract void initPresenter();
 

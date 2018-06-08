@@ -2,6 +2,7 @@ package com.wind.androidplay.ui.activity;
 
 
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -27,6 +28,8 @@ import com.wind.androidplay.ui.fragment.SystemFragment;
 import com.wind.baselibrary.utils.ActivityUtils;
 import com.wind.baselibrary.utils.BottomNavigationViewHelper;
 
+import java.lang.ref.WeakReference;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 //
@@ -34,10 +37,10 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
 
     BottomNavigationView bottomNavigationView;
 
-    DrawerLayout mDrawerLayout;
-    Toolbar toolbar;
-    TextView title;
-    NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
+    private Toolbar toolbar;
+    private TextView title;
+    private NavigationView mNavigationView;
 
     private HomeFragment homeFragment;
     private NavigationFragment navigationFragment;
@@ -45,6 +48,8 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
     private SystemFragment systemFragment;
     private Fragment[] fragments;
     private boolean isExit;
+    private final int handlerWhat = 0x10001;
+    private ExitHandler mExitHandler;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -88,6 +93,7 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
 
     @Override
     protected void init() {
+        mExitHandler = new ExitHandler(this);
         initViews();
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -182,7 +188,7 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
                 if (!isExit) {
                     showToast(R.string.play_main_exit);
                     isExit = !isExit;
-                    new Handler().postDelayed(() -> isExit = !isExit, 2000);
+                    mExitHandler.sendEmptyMessageDelayed(handlerWhat, 2000);
                 } else {
                     ActivityUtils.removeAll();
                     finish();
@@ -224,5 +230,24 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
         switch (item.getItemId()) {
         }
         return true;
+    }
+
+
+    private class ExitHandler extends Handler {
+        WeakReference<HomeActivity> homeActivityWeakReference;
+
+        public ExitHandler(HomeActivity activity) {
+            homeActivityWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case handlerWhat:
+                    isExit = !isExit;
+                    break;
+            }
+        }
     }
 }

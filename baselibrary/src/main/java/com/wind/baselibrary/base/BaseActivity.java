@@ -28,9 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected View mLoadingView;
     protected LottieAnimationView mLoadingAnimation;
 
-
-    // private Unbinder bind;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void initPresenter();
-
 
     @Override
     protected void onDestroy() {
@@ -80,5 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         showToast(getString(strId));
     }
 
-
+    protected <V extends View> V $(int id) {
+        return (V) findViewById(id);
+    }
 }

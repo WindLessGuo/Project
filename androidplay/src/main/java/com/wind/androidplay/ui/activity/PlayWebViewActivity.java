@@ -100,8 +100,12 @@ public class PlayWebViewActivity extends PlayBaseActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) mProgressBar.setVisibility(View.GONE);
+                if (newProgress == 100) {
+                    mProgressBar.setVisibility(View.GONE);
+                    closeLoading();
+                }
                 else {
+                    showLoading();
                     mProgressBar.setVisibility(View.VISIBLE);
                     mProgressBar.setProgress(newProgress);
                 }

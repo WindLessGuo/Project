@@ -14,7 +14,7 @@ public abstract class PlayBaseActivity<B extends BasePresenter> extends
 
     protected B mPresenter;
 
-
+     
     protected void initPresenter() {
         if (mPresenter != null) {
             mPresenter.onAttache(this);
@@ -44,12 +44,12 @@ public abstract class PlayBaseActivity<B extends BasePresenter> extends
 
     @Override
     public void showLoading() {
-        //mLoadingView.setVisibility(View.VISIBLE);
-        // TODO: 2018/6/7 编写json
-        //  mLoadingAnimation.setAnimation("lottifiles.com - QR Scan");
+        if (mLoadingView == null) return;
+        mLoadingView.setVisibility(View.VISIBLE);
+        mLoadingAnimation.setAnimation("custom_load.json");
         //mLoadingAnimation.setRepeatMode(ValueAnimator.INFINITE); 并不起作用
-        //   mLoadingAnimation.loop(true);
-        //mLoadingAnimation.playAnimation();
+        mLoadingAnimation.loop(true);
+        mLoadingAnimation.playAnimation();
     }
 
 

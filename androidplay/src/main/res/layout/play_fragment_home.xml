@@ -5,4 +5,5 @@
     android:background="@color/common_bg">
 
     <include layout="@layout/common_refresh_layout" />
+
 </android.support.constraint.ConstraintLayout>
