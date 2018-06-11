@@ -33,7 +33,6 @@ import java.util.List;
  */
 public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implements OnRefreshListener, OnLoadMoreListener, HomeContract.HomeView {
 
-
     private SmartRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
@@ -65,8 +64,7 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
 
     @Override
     protected void init() {
-        showLoading();
-        refreshLayout = rootView.findViewById(R.id.common_view);
+        refreshLayout = rootView.findViewById(R.id.fresh_layout);
         recyclerView = rootView.findViewById(R.id._recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         //数据 只有一列的情况下（未超过一屏）
@@ -81,8 +79,10 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
         homeAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         homeAdapter.setOnItemClickListener((adapter, view, position)
                 -> skipView(mlist.get(position).getLink(),
-                mlist.get(position).getTitle(), false));
+                mlist.get(position).getTitle(), false,
+                mlist.get(position).isCollect()));
         recyclerView.setAdapter(homeAdapter);
+        lazyLoad();
     }
 
     @Override
@@ -129,16 +129,18 @@ public class HomeFragment extends PlayNormalBaseFragment<HomePresenter> implemen
         //设置指示器位置（当banner模式中有指示器时）
         banner.setIndicatorGravity(BannerConfig.CENTER);
         banner.setOnBannerListener(i ->
-                skipView(list.get(i).getUrl(), list.get(i).getTitle(), true));
+                skipView(list.get(i).getUrl(), list.get(i).getTitle(), true,false));
         //banner设置方法全部调用完毕时最后调用
         banner.start();
     }
 
-    private void skipView(String url, String mTitle, boolean s) {
+    private void skipView(String url, String mTitle, boolean s,boolean isCollection) {
         ARouter.getInstance().build(webViewActivity)
                 .withString(linkUrl, url)
                 .withString(title, mTitle)
-                .withBoolean(isBanner, s).navigation();
+                .withBoolean(isBanner, s)
+                .withBoolean(collection, isCollection)
+                .navigation();
     }
 
     @Override

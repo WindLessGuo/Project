@@ -3,18 +3,19 @@ package com.wind.androidplay.base;
 import android.view.View;
 import android.widget.Toast;
 
+import com.wind.androidplay.utils.PlayUiPath;
 import com.wind.androidplay.utils.Tags;
 import com.wind.baselibrary.base.BaseActivity;
 import com.wind.baselibrary.base.BasePresenter;
 import com.wind.baselibrary.base.BaseView;
 
 public abstract class PlayBaseActivity<B extends BasePresenter> extends
-        BaseActivity implements Tags, BaseView {
+        BaseActivity implements Tags, BaseView, PlayUiPath {
 
 
     protected B mPresenter;
 
-     
+
     protected void initPresenter() {
         if (mPresenter != null) {
             mPresenter.onAttache(this);

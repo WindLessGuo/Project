@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardMaxElevation="@dimen/dp_4"
+    android:layout_marginTop="@dimen/dp_10"
     app:cardCornerRadius="@dimen/dp_4"
-    android:layout_marginTop="@dimen/dp_10">
+    app:cardMaxElevation="@dimen/dp_4">
 
 
     <android.support.constraint.ConstraintLayout
@@ -69,6 +69,36 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/play_list_text_second_title"
                 tools:text="时间" />
+
+
+            <TextView
+                android:id="@+id/play_home_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/play_common_margin5"
+                android:background="@drawable/play_back_green_oval_green"
+                android:gravity="center"
+                android:paddingLeft="@dimen/play_dp_5"
+                android:paddingRight="@dimen/play_dp_5"
+                android:text="新"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="@dimen/play_list_text_second_title"
+                android:visibility="gone" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/play_home_tag1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/play_common_margin5"
+                android:background="@drawable/play_back_green_rectangle_red"
+                android:gravity="center"
+                android:paddingLeft="@dimen/play_dp_5"
+                android:paddingRight="@dimen/play_dp_5"
+                android:text="项目"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/play_list_text_second_title" />
+
 
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

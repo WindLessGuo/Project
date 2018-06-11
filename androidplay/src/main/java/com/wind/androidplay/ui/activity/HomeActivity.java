@@ -17,8 +17,10 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.androidplay.R;
 import com.wind.androidplay.base.PlayBaseActivity;
 import com.wind.androidplay.ui.fragment.HomeFragment;
@@ -31,16 +33,19 @@ import com.wind.baselibrary.utils.BottomNavigationViewHelper;
 import java.lang.ref.WeakReference;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.wind.androidplay.utils.PlayUiPath.loginActivity;
 
 //
 public class HomeActivity extends PlayBaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
     private TextView title;
     private NavigationView mNavigationView;
+    private View mNavigationViewHeader;
+    private TextView userName;
 
     private HomeFragment homeFragment;
     private NavigationFragment navigationFragment;
@@ -130,6 +135,13 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
         toolbar = findViewById(R.id.play_toolbar);
         title = findViewById(R.id.play_main_title);
         mNavigationView = findViewById(R.id.play_navigation);
+
+        mNavigationViewHeader = mNavigationView.inflateHeaderView(R.layout.play_home_nav_header_navigation_drawer);
+
+        userName = mNavigationViewHeader.findViewById(R.id.drawer_header_name);
+
+        mNavigationViewHeader.findViewById(R.id.play_drawer_header).setOnClickListener(v ->
+                ARouter.getInstance().build(loginActivity).navigation());
     }
 
     private void initDrawLayout() {
@@ -160,6 +172,13 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
                 //设置右边菜单滑动后的占据屏幕大小
                 mContent.setScaleX(endScale);
                 mContent.setScaleY(endScale);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+
             }
         };
         toggle.syncState();
@@ -223,12 +242,10 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
         } else super.onBackPressed();
     }
 
-
-    //drawerlayout
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-        }
+
+
         return true;
     }
 

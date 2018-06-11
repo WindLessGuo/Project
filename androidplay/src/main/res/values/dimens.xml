@@ -10,18 +10,19 @@
     <dimen name="play_text_view_padding">10dp</dimen>
     <dimen name="play_home_list_head">30dp</dimen>
     <dimen name="play_common_margin10">10dp</dimen>
+    <dimen name="play_common_margin2">2dp</dimen>
     <dimen name="play_common_margin4">4dp</dimen>
     <dimen name="play_common_margin5">5dp</dimen>
-
-
-
-
-
-
-
-
+    <dimen name="play_dp_11">11dp</dimen>
+    <dimen name="play_dp_12">12dp</dimen>
+    <dimen name="play_dp_13">13dp</dimen>
+    <dimen name="play_dp_20">20dp</dimen>
+    <dimen name="play_dp_5">5dp</dimen>
+    <dimen name="play_dp_15">15dp</dimen>
+    <dimen name="play_dp_50">50dp</dimen>
 
 
     <dimen name="play_list_text_title">18sp</dimen>
     <dimen name="play_list_text_second_title">12sp</dimen>
+    <dimen name="play_dp_30">30dp</dimen>
 </resources>

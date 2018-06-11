@@ -10,6 +10,7 @@ public interface Tags {
     String linkUrl = "link";
     String title = "title";
     String isBanner = "banner";
+    String collection="collection";
 
 
 }

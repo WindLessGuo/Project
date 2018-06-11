@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LoginActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/play_dp_50"
+        android:paddingLeft="@dimen/play_dp_50"
+        android:paddingRight="@dimen/play_dp_50"
+        app:layout_constraintTop_toBottomOf="@+id/login_toolbar">
+
+        <AutoCompleteTextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/play_ic_account"
+            android:hint="@string/play_input_user_name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/play_dp_20"
+        android:paddingLeft="@dimen/play_dp_50"
+        android:paddingRight="@dimen/play_dp_50"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <AutoCompleteTextView
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/play_ic_password"
+            android:hint="@string/play_input_user_pass"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/play_dp_50"
+        android:layout_marginRight="@dimen/play_dp_50"
+        android:layout_marginTop="@dimen/play_dp_30"
+        android:background="@color/play_light_blue"
+        android:text="@string/play_login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/play_list_text_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass" />
+
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/play_dp_50"
+        android:layout_marginRight="@dimen/play_dp_50"
+        android:layout_marginTop="@dimen/play_common_margin10"
+        android:gravity="end"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/play_list_text_second_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        tools:text="@string/app_name" />
+
+
+</android.support.constraint.ConstraintLayout>

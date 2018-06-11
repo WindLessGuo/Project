@@ -34,7 +34,7 @@ public class HomePresenter extends BasePresenter<HomeContract.HomeView> implemen
 
 
                     @Override
-                    protected void onFailer(Throwable e) {
+                    protected void onFailure(Throwable e) {
                         mView.showError(e.getMessage());
                     }
 
@@ -59,14 +59,15 @@ public class HomePresenter extends BasePresenter<HomeContract.HomeView> implemen
                         }
                     }
 
+
                     @Override
-                    protected void onFailer(Throwable e) {
+                    protected void onFailure(Throwable e) {
                         mView.showError(e.getMessage());
                     }
 
                     @Override
                     protected void onFinish() {
-                       // mView.closeLoading();
+                        mView.closeLoading();
                     }
                 });
     }

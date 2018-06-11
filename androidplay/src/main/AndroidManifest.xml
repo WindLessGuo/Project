@@ -11,6 +11,12 @@
         <activity
             android:name="com.wind.androidplay.ui.activity.PlayWebViewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wind.androidplay.ui.activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.wind.androidplay.ui.activity.RegisterActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

@@ -38,12 +38,27 @@ public class HomeAdapter extends BaseQuickAdapter<HomeListDataBean.DatasBean, Ho
         helper.classifyName.setText("分类：" + item.getSuperChapterName() + "/" + item.getChapterName());
         helper.author.setText(item.getAuthor());
         helper.time.setText("分享于\t" + item.getNiceDate());
+
+        if (item.getNiceDate().contains("小时")||
+                item.getNiceDate().contains("分钟")){
+            helper.tag.setVisibility(View.VISIBLE);
+        }
+
+        if (item.getSuperChapterName().contains("项目")){
+            helper.tag1.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+
     }
 
 
     public static class ViewHolder extends BaseViewHolder {
         ImageView header;
         TextView title, classifyName, author, time;
+        TextView tag,tag1;
 
 
         public ViewHolder(View view) {
@@ -53,6 +68,8 @@ public class HomeAdapter extends BaseQuickAdapter<HomeListDataBean.DatasBean, Ho
             classifyName = view.findViewById(R.id.play_home_classify_name);
             author = view.findViewById(R.id.play_home_list_author);
             time = view.findViewById(R.id.play_home_list_time);
+            tag = view.findViewById(R.id.play_home_tag);
+            tag1 = view.findViewById(R.id.play_home_tag1);
         }
     }
 

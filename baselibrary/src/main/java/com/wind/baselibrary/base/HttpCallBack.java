@@ -12,7 +12,7 @@ public abstract class HttpCallBack<T> implements Observer<T> {
 
     protected abstract void onSuccess(T t);
 
-    protected abstract void onFailer(Throwable e);
+    protected abstract void onFailure(Throwable e);
 
     protected abstract void onFinish();
 
@@ -35,7 +35,7 @@ public abstract class HttpCallBack<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        onFailer(e);
+        onFailure(e);
         onFinish();
     }
 

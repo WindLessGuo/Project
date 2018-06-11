@@ -1,15 +1,14 @@
 package com.wind.androidplay.base;
 
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.wind.androidplay.R;
+import com.wind.androidplay.utils.Loading;
+import com.wind.androidplay.utils.PlayUiPath;
 import com.wind.androidplay.utils.Tags;
 import com.wind.baselibrary.base.BasePresenter;
 import com.wind.baselibrary.base.BaseView;
 import com.wind.baselibrary.base.NormalBaseFragment;
-import com.wind.baselibrary.content.PlayUiPath;
 
 public abstract class PlayNormalBaseFragment<P extends BasePresenter>
         extends NormalBaseFragment implements Tags, BaseView, PlayUiPath {
@@ -18,10 +17,10 @@ public abstract class PlayNormalBaseFragment<P extends BasePresenter>
     protected View emptyView;
 
 
-    private LottieAnimationView mLoadingAnimation;
+  /*  private LottieAnimationView mLoadingAnimation;
     private View mLoadingView;
     private ViewGroup mNormalView;
-
+*/
 
     protected void initPresenter() {
         initializablePresenter();
@@ -31,7 +30,7 @@ public abstract class PlayNormalBaseFragment<P extends BasePresenter>
     }
 
 
-    @Override
+  /*  @Override
     protected void initializeLoading(View rootView) {
         if (rootView == null) return;
         mNormalView = rootView.findViewById(R.id.common_view);
@@ -56,7 +55,7 @@ public abstract class PlayNormalBaseFragment<P extends BasePresenter>
         //mErrorView.setVisibility(View.GONE);
         mLoadingView.setVisibility(View.GONE);
         mNormalView.setVisibility(View.VISIBLE);
-    }
+    }*/
 
 
     protected abstract void initializablePresenter();
@@ -69,21 +68,25 @@ public abstract class PlayNormalBaseFragment<P extends BasePresenter>
 
     @Override
     public void showLoading() {
-        if (!canShowing) {
+
+        Loading.showLoading(mActivity);
+
+  /*      if (!canShowing) {
             if (mLoadingView == null) return;
             mLoadingView.setVisibility(View.VISIBLE);
             mLoadingAnimation.setAnimation("custom_load.json");
             //mLoadingAnimation.setRepeatMode(ValueAnimator.INFINITE); 并不起作用
             mLoadingAnimation.loop(true);
             mLoadingAnimation.playAnimation();
-        }
+        }*/
     }
 
     @Override
     public void closeLoading() {
-        if (mLoadingAnimation.isAnimating() && mLoadingView.getVisibility() == View.VISIBLE)
+        Loading.closeLoading();
+       /* if (mLoadingAnimation.isAnimating() && mLoadingView.getVisibility() == View.VISIBLE)
             mLoadingAnimation.cancelAnimation();
-        mLoadingView.setVisibility(View.GONE);
+        mLoadingView.setVisibility(View.GONE);*/
     }
 
     @Override

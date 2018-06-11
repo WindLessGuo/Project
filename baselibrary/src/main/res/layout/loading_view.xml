@@ -18,5 +18,5 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/space"
         android:layout_centerInParent="true"
-        android:background="@android:color/white" />
+        android:background="@android:color/transparent" />
 </LinearLayout>

@@ -1,6 +1,9 @@
 package com.wind.androidplay.ui.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Build;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -15,16 +18,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.androidplay.R;
 import com.wind.androidplay.base.PlayBaseActivity;
 import com.wind.androidplay.utils.Tags;
 
 import java.lang.reflect.Method;
 
-import static com.wind.baselibrary.content.PlayUiPath.webViewActivity;
+import static com.wind.androidplay.utils.PlayUiPath.webViewActivity;
+
 
 /**
  * @author: GBX
@@ -40,7 +42,8 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
     private String url;
     private String mTitle;
-    private boolean isBanner;
+    private boolean isBanner, isCollectioned;
+    private MenuItem itemCollection;
 
 
     @Override
@@ -103,8 +106,7 @@ public class PlayWebViewActivity extends PlayBaseActivity {
                 if (newProgress == 100) {
                     mProgressBar.setVisibility(View.GONE);
                     closeLoading();
-                }
-                else {
+                } else {
                     showLoading();
                     mProgressBar.setVisibility(View.VISIBLE);
                     mProgressBar.setProgress(newProgress);
@@ -124,7 +126,7 @@ public class PlayWebViewActivity extends PlayBaseActivity {
         }
         isBanner = getIntent().getBooleanExtra(Tags.isBanner, false);
 
-
+        isCollectioned = getIntent().getBooleanExtra(Tags.collection, false);
     }
 
 
@@ -144,10 +146,24 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!isBanner) {
-            getMenuInflater().inflate(R.menu.play_menu_webview, menu);
+        if (isBanner) {
+            getMenuInflater().inflate(R.menu.play_menu_webview_banner, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.play_menu_webview_not_banner, menu);
+            itemCollection = menu.getItem(R.id.collection);
+            setCollectionMenuItem();
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void setCollectionMenuItem() {
+        if (isCollectioned) {
+            itemCollection.setIcon(R.mipmap.play_collction);
+            itemCollection.setTitle(R.string.play_un_collection);
+        } else {
+            itemCollection.setIcon(R.mipmap.play_un_collection);
+            itemCollection.setTitle(R.string.play_collection);
+        }
     }
 
 
@@ -156,9 +172,36 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
         if (item.getItemId() == android.R.id.home) {
             PlayWebViewActivity.this.finish();
+        } else if (item.getItemId() == R.id.share) {
+            systemShare();
+        } else if (item.getItemId() == R.id.open_with_client_browser) {
+            openWithSystemBrowser();
+        } else if (item.getItemId() == R.id.collection) {
+            if (isCollectioned){
+
+            }
         }
 
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openWithSystemBrowser() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri content_url = Uri.parse(url);
+        intent.setData(content_url);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+        startActivity(intent);
+    }
+
+    private void systemShare() {
+        Intent textIntent = new Intent(Intent.ACTION_SEND);
+        textIntent.setAction(Intent.ACTION_SEND);
+        textIntent.setType("text/plain");
+        textIntent.putExtra(Intent.EXTRA_TEXT, mTitle + url);
+        startActivity(Intent.createChooser(textIntent, "分享"));
     }
 
     @Override
