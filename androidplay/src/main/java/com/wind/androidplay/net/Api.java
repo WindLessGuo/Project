@@ -108,8 +108,8 @@ public interface Api {
      *
      * @return
      */
-    @GET("user/login")
-    Observable<Object> userLogin(
+    @POST("user/login")
+    Observable<BaseBean> userLogin(
             @Query("username") String username,
             @Query("password") String password
     );
@@ -120,8 +120,8 @@ public interface Api {
      *
      * @return
      */
-    @GET("user/register")
-    Observable<Object> userRegister(
+    @POST("user/register")
+    Observable<BaseBean> userRegister(
             @Query("username") String username,
             @Query("password") String password,
             @Query("repassword") String repassword

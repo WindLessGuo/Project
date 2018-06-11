@@ -24,6 +24,9 @@
     <string name="play_input_user_name">请输入用户名</string>
     <string name="play_input_user_pass">请输入密码</string>
     <string name="play_login">登录</string>
+    <string name="play_input_user_email">请输入邮箱</string>
+    <string name="play_input_pass">请输入密码</string>
+    <string name="play_input_pass_again">请再次输入密码</string>
 
 
 </resources>

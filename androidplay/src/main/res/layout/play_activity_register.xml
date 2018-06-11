@@ -43,6 +43,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/play_bg_white_rectangle_light_red"
                 android:drawableLeft="@drawable/play_ic_email"
+                android:drawablePadding="@dimen/dp_4"
+                android:hint="@string/play_input_user_email"
                 android:padding="@dimen/play_common_margin10"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
@@ -53,13 +55,17 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/play_dp_20">
 
             <AutoCompleteTextView
+                android:id="@+id/register_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/play_bg_white_rectangle_light_red"
-                android:drawableLeft="@drawable/play_ic_password"
+                android:drawableLeft="@drawable/play_ic_password_white_bg"
+                android:drawablePadding="@dimen/dp_4"
+                android:hint="@string/play_input_pass"
                 android:padding="@dimen/play_common_margin10"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
@@ -70,13 +76,17 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/play_dp_20">
 
             <AutoCompleteTextView
+                android:id="@+id/register_pass_again"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/play_bg_white_rectangle_light_red"
-                android:drawableLeft="@drawable/play_ic_password"
+                android:drawableLeft="@drawable/play_ic_password_white_bg"
+                android:drawablePadding="@dimen/dp_4"
+                android:hint="@string/play_input_pass_again"
                 android:padding="@dimen/play_common_margin10"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
@@ -86,9 +96,11 @@
 
 
         <Button
+            android:onClick="userRegister"
+            android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/play_dp_20"
+            android:layout_marginTop="@dimen/play_dp_30"
             android:background="@drawable/play_bg_rectangle_white"
             android:padding="@dimen/play_common_margin10"
             android:text="注\t册"

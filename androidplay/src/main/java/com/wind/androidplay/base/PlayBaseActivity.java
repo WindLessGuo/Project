@@ -17,10 +17,13 @@ public abstract class PlayBaseActivity<B extends BasePresenter> extends
 
 
     protected void initPresenter() {
+        registerPresenter();
         if (mPresenter != null) {
             mPresenter.onAttache(this);
         }
     }
+
+    protected abstract void registerPresenter();
 
     protected void showToast(String msg) {
         Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT).show();

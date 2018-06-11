@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_toolbar">
 
         <AutoCompleteTextView
-            android:id="@+id/user_name"
+            android:id="@+id/login_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/play_ic_account"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name">
 
         <AutoCompleteTextView
-            android:id="@+id/user_password"
+            android:id="@+id/login_user_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/play_ic_password"
@@ -57,6 +57,7 @@
 
 
     <Button
+        android:onClick="userLogin"
         android:id="@+id/login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

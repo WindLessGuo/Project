@@ -249,6 +249,11 @@ public class HomeActivity extends PlayBaseActivity implements NavigationView.OnN
         return true;
     }
 
+    @Override
+    protected void registerPresenter() {
+
+    }
+
 
     private class ExitHandler extends Handler {
         WeakReference<HomeActivity> homeActivityWeakReference;

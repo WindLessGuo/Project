@@ -131,6 +131,11 @@ public class PlayWebViewActivity extends PlayBaseActivity {
 
 
     @Override
+    protected void registerPresenter() {
+
+    }
+
+    @Override
     protected void onDestroy() {
         mWebView.clearHistory();
         mWebView.clearCache(true);
@@ -138,10 +143,7 @@ public class PlayWebViewActivity extends PlayBaseActivity {
         super.onDestroy();
     }
 
-    @Override
-    protected void initPresenter() {
 
-    }
 
 
     @Override
