@@ -1,6 +1,7 @@
 package com.wind.androidplay.presenter;
 
-import com.wind.baselibrary.base.BasePresenter;
+import com.wind.androidplay.base.BaseBean;
+import com.wind.androidplay.bean.UserBean;
 import com.wind.baselibrary.base.BaseView;
 
 /**
@@ -12,7 +13,7 @@ public interface LoginContrace {
 
     interface LoginView extends BaseView {
 
-        void loginSuccess();
+        void loginSuccess(BaseBean<UserBean> baseBean);
 
         void loginfailure(String msg);
 

@@ -11,9 +11,12 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.wind.androidplay.R;
+import com.wind.androidplay.base.BaseBean;
 import com.wind.androidplay.base.PlayBaseActivity;
+import com.wind.androidplay.bean.UserBean;
 import com.wind.androidplay.presenter.LoginContrace;
 import com.wind.androidplay.presenter.LoginPresenter;
+import com.wind.baselibrary.utils.LG;
 
 import static com.wind.androidplay.utils.PlayUiPath.loginActivity;
 
@@ -66,8 +69,8 @@ public class LoginActivity extends PlayBaseActivity<LoginPresenter> implements L
     }
 
     @Override
-    public void loginSuccess() {
-
+    public void loginSuccess(BaseBean<UserBean> baseBean) {
+        LG.D("loginSuccess",baseBean.toString());
     }
 
     @Override

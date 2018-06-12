@@ -1,6 +1,7 @@
 package com.wind.androidplay.presenter;
 
 import com.wind.androidplay.base.BaseBean;
+import com.wind.androidplay.bean.UserBean;
 import com.wind.androidplay.net.Api;
 import com.wind.baselibrary.base.BasePresenter;
 import com.wind.baselibrary.base.HttpCallBack;
@@ -24,11 +25,11 @@ public class LoginPresenter extends
         mView.showLoading();
 
         obtainNetData(NetManager.obtainClass(Api.class)
-                .userLogin(name, pass), new HttpCallBack<BaseBean>() {
+                .userLogin(name, pass), new HttpCallBack<BaseBean<UserBean>>() {
             @Override
-            protected void onSuccess(BaseBean baseBean) {
+            protected void onSuccess(BaseBean<UserBean> baseBean) {
                 if (isSuccess(baseBean.errorCode)) {
-                    mView.loginSuccess();
+                    mView.loginSuccess(baseBean);
                 } else mView.loginfailure(baseBean.errorMsg);
             }
 

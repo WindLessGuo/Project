@@ -10,6 +10,7 @@ import com.wind.androidplay.bean.ProClassifyBean;
 import com.wind.androidplay.bean.ProListDataBean;
 import com.wind.androidplay.bean.SystemAtricleBean;
 import com.wind.androidplay.bean.SystemTreeBean;
+import com.wind.androidplay.bean.UserBean;
 
 import java.util.List;
 
@@ -109,7 +110,7 @@ public interface Api {
      * @return
      */
     @POST("user/login")
-    Observable<BaseBean> userLogin(
+    Observable<BaseBean<UserBean>> userLogin(
             @Query("username") String username,
             @Query("password") String password
     );
